@@ -1,8 +1,11 @@
 {
-  "name": "fhir-react",
-  "version": "0.3.13",
+  "name": "@credolabs/fhir-react",
+  "version": "0.3.15",
   "description": "React component library for displaying FHIR Resources ",
   "main": "build/index.js",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "peerDependencies": {
     "react": "^17.0.2"
   },
@@ -26,6 +29,7 @@
     "test:coverage": "NODE_ENV=test jest --coverage .",
     "test:watch": "NODE_ENV=test jest --watchAll",
     "start": "NODE_ENV=production webpack --watch",
+    "prebuild": "rimraf build",
     "build": "NODE_ENV=production webpack",
     "lint": "eslint --max-warnings 0 .",
     "lint:fix": "eslint --fix .",
@@ -34,7 +38,8 @@
     "storybook": "start-storybook --port 63653",
     "deploy-storybook": "storybook-to-aws-s3 --bucket-path=storybook-fhir-react-lib --aws-profile=storybook-deployer",
     "deploy-storybook-branch": "storybook-to-aws-s3 --aws-profile=storybook-deployer",
-    "deploy-storybook-pr-branch": "storybook-to-aws-s3 --bucket-path=fhir-react-lib-test-storybook/branch/$(git branch --show-current) --aws-profile=1up-marketing-dev-admin"
+    "deploy-storybook-pr-branch": "storybook-to-aws-s3 --bucket-path=fhir-react-lib-test-storybook/branch/$(git branch --show-current) --aws-profile=1up-marketing-dev-admin",
+    "prepublishOnly": "npm run build"
   },
   "author": {
     "name": "1upHealth",
@@ -109,8 +114,9 @@
     "jest": "^24.9.0",
     "mini-css-extract-plugin": "^1.6.2",
     "npm-check-updates": "^12.5.2",
-    "prettier": "1.19.1",
+    "prettier": "2.0.0",
     "react-dom": "^17.0.2",
+    "rimraf": "^3.0.2",
     "sass": "^1.49.9",
     "sass-loader": "^10.2.0",
     "style-loader": "^2.0.0",
